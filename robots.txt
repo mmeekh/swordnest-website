@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /mobile.html
+Sitemap: https://swordnest.com/sitemap.xml

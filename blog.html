@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Mobil Yönlendirme Sistemi -->
+    <script>
+    (function() {
+        // Mobil cihaz tespiti
+        const isMobile = window.innerWidth <= 768 || 
+                        /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        // Eğer mobil cihazsa mobile.html'e yönlendir
+        if (isMobile) {
+            console.log('📱 Mobil cihaz tespit edildi, mobile.html\'e yönlendiriliyor...');
+            setTimeout(() => {
+                window.location.href = 'mobile.html';
+            }, 100);
+        } else {
+            console.log('🖥️ Desktop cihaz tespit edildi, desktop interface yükleniyor...');
+        }
+    })();
+    </script>
+    
+    <title>AI Blog - Sword Nest | Yapay Zeka Video Üretimi ve Reklamcılık Rehberi</title>
+    <meta name="description" content="Sword Nest'in AI blog'unda yapay zeka video üretimi, AI reklamcılık, neural network pazarlama ve dijital dönüşüm hakkında detaylı makaleler. AI teknolojilerinin reklamcılıkta kullanımı.">
+    <meta name="keywords" content="AI blog, yapay zeka video üretimi, AI reklamcılık, neural network marketing, artificial intelligence advertising, AI video production, machine learning marketing, generative AI, AI marketing blog">
+    <meta name="author" content="Sword Nest">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    
+    <link rel="canonical" href="https://swordnest.com/blog.html">
+    
+    <meta name="language" content="Turkish">
+    <meta name="geo.region" content="TR-34">
+    <meta name="geo.placename" content="Istanbul">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://swordnest.com/blog.html">
+    <meta property="og:title" content="AI Blog - Sword Nest | Yapay Zeka Video Üretimi ve Reklamcılık">
+    <meta property="og:description" content="Yapay zeka video üretimi, AI reklamcılık ve neural network pazarlama hakkında uzman görüşleri ve detaylı analizler.">
+    <meta property="og:image" content="https://swordnest.com/images/meta.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Sword Nest AI Blog - Yapay Zeka Video Üretimi">
+    <meta property="og:site_name" content="Sword Nest AI Marketing">
+    <meta property="og:locale" content="tr_TR">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://swordnest.com/blog.html">
+    <meta name="twitter:title" content="Sword Nest AI Blog - Yapay Zeka Reklamcılık Rehberi">
+    <meta name="twitter:description" content="AI video üretimi ve yapay zeka reklamcılık hakkında uzman görüşleri ve detaylı analizler.">
+    <meta name="twitter:image" content="https://swordnest.com/images/meta.webp">
+    <meta name="twitter:image:alt" content="Sword Nest AI Blog - Yapay Zeka Video Üretimi">
+    <meta name="twitter:creator" content="@swordnest">
+    
+    <link rel="icon" type="image/webp" href="images/favicon.webp">
+    <link rel="apple-touch-icon" href="images/favicon.webp">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/styles/components/navigation.css">
+    <link rel="stylesheet" href="assets/styles/pages/blog.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Blog",
+                "@id": "https://swordnest.com/blog.html#blog",
+                "url": "https://swordnest.com/blog.html",
+                "name": "Sword Nest AI Blog",
+                "description": "Yapay zeka video üretimi, AI reklamcılık ve neural network pazarlama hakkında uzman görüşleri",
+                "publisher": {
+                    "@id": "https://swordnest.com/#organization"
+                },
+                "inLanguage": "tr-TR",
+                "blogPost": [
+                    {
+                        "@type": "BlogPosting",
+                        "headline": "Yapay Zeka Video Üretimi: 2025'te Reklamcılığın Geleceği",
+                        "description": "AI destekli video üretiminin reklamcılık sektörünü nasıl dönüştürdüğü ve gelecekte bizi bekleyen yenilikler",
+                        "author": {
+                            "@id": "https://swordnest.com/#organization"
+                        },
+                        "datePublished": "2025-01-15",
+                        "dateModified": "2025-01-15"
+                    },
+                    {
+                        "@type": "BlogPosting",
+                        "headline": "Neural Network Marketing: Hedef Kitle Analizinde Devrim",
+                        "description": "Sinir ağlarının pazarlama stratejilerinde kullanımı ve kişiselleştirilmiş kampanya oluşturma",
+                        "author": {
+                            "@id": "https://swordnest.com/#organization"
+                        },
+                        "datePublished": "2025-01-10",
+                        "dateModified": "2025-01-10"
+                    }
+                ]
+            },
+            {
+                "@type": "BreadcrumbList",
+                "@id": "https://swordnest.com/blog.html#breadcrumb",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "item": {
+                            "@id": "https://swordnest.com/",
+                            "name": "Ana Sayfa"
+                        }
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "item": {
+                            "@id": "https://swordnest.com/blog.html",
+                            "name": "Blog"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+    </script>
+</head>
+
+<body>
+    <div id="nav">
+        <div class="nav-brand">
+            <img src="images/logo.webp" alt="Sword Nest Logo - Yapay Zeka Destekli Reklam Ajansı" style="height:40px; width:auto; vertical-align:middle;">
+            <a href="index.html" style="text-decoration:none; color:inherit;"><h3><b>SWORD</b> NEST</h3></a>
+        </div>
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-link" data-page="home">Ana Sayfa</a>
+            <a href="hakkimizda.html" class="nav-link" data-page="about">Hakkımızda</a>
+            <a href="projeler.html" class="nav-link" data-page="projects">Projeler</a>
+            <a href="blog.html" class="nav-link active" data-page="blog">Blog</a>
+            <a href="iletisim.html" class="nav-link" data-page="contact">İletişim</a>
+        </nav>
+        <div class="nav-mobile-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="mobile-menu">
+        <div class="mobile-menu-content">
+            <a href="index.html" class="mobile-nav-link" data-page="home">Ana Sayfa</a>
+            <a href="hakkimizda.html" class="mobile-nav-link" data-page="about">Hakkımızda</a>
+            <a href="projeler.html" class="mobile-nav-link" data-page="projects">Projeler</a>
+            <a href="blog.html" class="mobile-nav-link active" data-page="blog">Blog</a>
+            <a href="iletisim.html" class="mobile-nav-link" data-page="contact">İletişim</a>
+        </div>
+    </div>
+
+    <div id="main">
+        <section id="blog-hero">
+            <div class="hero-content">
+                <h1>AI BLOG</h1>
+                <p>Yapay zeka video üretimi ve reklamcılığın geleceği hakkında uzman görüşleri</p>
+            </div>
+        </section>
+
+        <section id="blog-content">
+            <div class="container">
+                <div class="blog-grid">
+                    
+                    <!-- Article 1: AI Video Production -->
+                    <article class="blog-post featured" data-category="ai-video">
+                        <img src="https://images.pexels.com/photos/8566472/pexels-photo-8566472.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Yapay Zeka Video Üretimi" class="post-image">
+                        <div class="post-content-wrapper">
+                            <div class="post-meta">
+                                <span class="category">AI Video Üretimi</span>
+                                <span class="date">15 Ocak 2025</span>
+                                <span class="read-time">8 dk okuma</span>
+                            </div>
+                            <h2>Yapay Zeka Video Üretimi: 2025'te Reklamcılığın Geleceği</h2>
+                            <div class="post-excerpt">
+                                <p>Yapay zeka teknolojilerinin video üretim süreçlerine entegrasyonu, reklamcılık sektöründe devrim niteliğinde değişiklikler yaratıyor. Bu makalede, AI destekli video üretiminin nasıl çalıştığını, avantajlarını ve gelecekte bizi bekleyen yenilikleri detaylı olarak inceliyoruz.</p>
+                            </div>
+                            <div class="post-content">
+                                <h3>AI Video Üretimi Nasıl Çalışır?</h3>
+                                <p>Yapay zeka destekli video üretimi, geleneksel prodüksiyon süreçlerini tamamen dönüştürüyor. İşte bu teknolojinin temel bileşenleri:</p>
+                                
+                                <h4>1. Generative AI Modelleri</h4>
+                                <p>Modern AI video üretimi, GPT-4, DALL-E ve Stable Diffusion gibi gelişmiş generative AI modellerini kullanır. Bu modeller:</p>
+                                <ul>
+                                    <li>Metin açıklamalarından görsel içerik oluşturur</li>
+                                    <li>Mevcut görüntüleri analiz ederek benzer stillerde yeni içerik üretir</li>
+                                    <li>Farklı sanat stillerini ve estetik yaklaşımları öğrenir</li>
+                                    <li>Sürekli olarak kendini geliştirir ve iyileştirir</li>
+                                </ul>
+
+                                <h4>2. Neural Network Architecture</h4>
+                                <p>Video üretiminde kullanılan sinir ağları, insan beyninin çalışma prensibini taklit eder:</p>
+                                <ul>
+                                    <li><strong>Convolutional Neural Networks (CNN):</strong> Görsel özellikleri tanımlar ve analiz eder</li>
+                                    <li><strong>Recurrent Neural Networks (RNN):</strong> Zaman içindeki değişimleri takip eder</li>
+                                    <li><strong>Transformer Models:</strong> Uzun vadeli bağımlılıkları öğrenir</li>
+                                </ul>
+
+                                <h4>3. Video Synthesis Pipeline</h4>
+                                <p>AI video üretim süreci şu aşamalardan oluşur:</p>
+                                <ol>
+                                    <li><strong>Konsept Geliştirme:</strong> AI, marka kimliği ve hedef kitle analizine dayalı konseptler önerir</li>
+                                    <li><strong>Storyboard Oluşturma:</strong> Otomatik storyboard üretimi</li>
+                                    <li><strong>Görsel Üretim:</strong> Her sahne için AI destekli görsel oluşturma</li>
+                                    <li><strong>Animasyon:</strong> Hareket ve geçiş efektlerinin AI ile üretilmesi</li>
+                                    <li><strong>Post-Production:</strong> Renk düzeltme, ses senkronizasyonu ve final düzenlemeler</li>
+                                </ol>
+
+                                <h3>AI Video Üretiminin Avantajları</h3>
+                                
+                                <h4>Hız ve Verimlilik</h4>
+                                <p>Geleneksel video prodüksiyonu haftalar sürerken, AI destekli üretim günler içinde tamamlanabilir. Bu süreç:</p>
+                                <ul>
+                                    <li>%85 daha hızlı üretim süresi</li>
+                                    <li>7/24 çalışma kapasitesi</li>
+                                    <li>Anında revizyon imkanı</li>
+                                    <li>Paralel proje yönetimi</li>
+                                </ul>
+
+                                <h4>Maliyet Optimizasyonu</h4>
+                                <p>AI video üretimi, geleneksel yöntemlere göre çok daha ekonomiktir:</p>
+                                <ul>
+                                    <li>Stüdyo kiralama maliyetlerinin ortadan kalkması</li>
+                                    <li>Aktör ve ekipman maliyetlerinin minimize edilmesi</li>
+                                    <li>Çekim hatalarının önlenmesi</li>
+                                    <li>Ölçeklenebilir üretim kapasitesi</li>
+                                </ul>
+
+                                <h4>Yaratıcı Özgürlük</h4>
+                                <p>AI teknolojisi, sınırsız yaratıcı imkanlar sunar:</p>
+                                <ul>
+                                    <li>İmkansız görünen sahnelerin oluşturulması</li>
+                                    <li>Farklı sanat stillerinin kolayca uygulanması</li>
+                                    <li>Kişiselleştirilmiş içerik üretimi</li>
+                                    <li>A/B testleri için çoklu versiyon oluşturma</li>
+                                </ul>
+
+                                <h3>2025'te Bizi Bekleyen Yenilikler</h3>
+                                
+                                <h4>Real-time AI Video Generation</h4>
+                                <p>Gelecekte, AI sistemleri gerçek zamanlı video üretimi yapabilecek. Bu teknoloji:</p>
+                                <ul>
+                                    <li>Canlı yayınlarda anında içerik üretimi</li>
+                                    <li>Kişiselleştirilmiş reklam deneyimleri</li>
+                                    <li>Etkileşimli video içerikleri</li>
+                                    <li>Dinamik fiyatlandırma ve ürün gösterimi</li>
+                                </ul>
+
+                                <h4>Emotional AI Integration</h4>
+                                <p>Duygusal zeka entegrasyonu ile AI sistemleri:</p>
+                                <ul>
+                                    <li>İzleyicinin duygusal tepkilerini analiz eder</li>
+                                    <li>Duygusal duruma göre içerik uyarlar</li>
+                                    <li>Daha etkili storytelling yapar</li>
+                                    <li>Marka bağlılığını artırır</li>
+                                </ul>
+
+                                <h3>Sword Nest'in AI Video Üretim Yaklaşımı</h3>
+                                <p>Sword Nest olarak, AI teknolojilerini insan yaratıcılığı ile birleştiriyoruz. Bu hibrit yaklaşım:</p>
+                                <ul>
+                                    <li>AI'nin hız ve verimliliğini kullanır</li>
+                                    <li>İnsan yaratıcılığının derinliğini korur</li>
+                                    <li>Marka kimliğine uygun özgün içerik üretir</li>
+                                    <li>Sürekli öğrenen ve gelişen sistemler kullanır</li>
+                                </ul>
+
+                                <div class="cta-section">
+                                    <h4>AI Video Üretimi ile Markanızı Geleceğe Taşıyın</h4>
+                                    <p>Sword Nest'in AI destekli video üretim hizmetleri hakkında daha fazla bilgi almak için bizimle iletişime geçin.</p>
+                                    <a href="iletisim.html" class="cta-button">Ücretsiz Danışmanlık Al</a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Article 2: Neural Network Marketing -->
+                    <article class="blog-post" data-category="neural-marketing">
+                        <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2595&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Neural Network Marketing" class="post-image">
+                        <div class="post-content-wrapper">
+                            <div class="post-meta">
+                                <span class="category">AI Reklamcılık</span>
+                                <span class="date">10 Ocak 2025</span>
+                                <span class="read-time">6 dk okuma</span>
+                            </div>
+                            <h3>Neural Network Marketing: Hedef Kitle Analizinde Devrim</h3>
+                            <div class="post-excerpt">
+                                <p>Sinir ağlarının pazarlama stratejilerinde kullanımı, hedef kitle analizini ve kampanya optimizasyonunu tamamen dönüştürüyor. Bu teknoloji nasıl çalışır ve neden bu kadar etkili?</p>
+                            </div>
+                            <div class="post-content">
+                                <h4>Neural Network Marketing Nedir?</h4>
+                                <p>Neural Network Marketing, yapay sinir ağlarını kullanarak pazarlama stratejilerini optimize eden bir yaklaşımdır. Bu sistem:</p>
+                                <ul>
+                                    <li>Büyük veri setlerini analiz eder</li>
+                                    <li>Karmaşık pattern'leri tespit eder</li>
+                                    <li>Gelecekteki davranışları tahmin eder</li>
+                                    <li>Kişiselleştirilmiş kampanyalar oluşturur</li>
+                                </ul>
+
+                                <h4>Nasıl Çalışır?</h4>
+                                <p>Neural Network Marketing sistemi şu adımları takip eder:</p>
+                                <ol>
+                                    <li><strong>Veri Toplama:</strong> Çeşitli kaynaklardan kullanıcı verileri toplanır</li>
+                                    <li><strong>Veri İşleme:</strong> Ham veriler temizlenir ve analiz için hazırlanır</li>
+                                    <li><strong>Pattern Recognition:</strong> AI, kullanıcı davranış pattern'lerini tespit eder</li>
+                                    <li><strong>Segmentation:</strong> Hedef kitle otomatik olarak segmentlere ayrılır</li>
+                                    <li><strong>Campaign Optimization:</strong> Her segment için optimize edilmiş kampanyalar oluşturulur</li>
+                                </ol>
+
+                                <h4>Avantajları</h4>
+                                <ul>
+                                    <li><strong>Yüksek Doğruluk:</strong> %95'e varan tahmin doğruluğu</li>
+                                    <li><strong>Gerçek Zamanlı Optimizasyon:</strong> Anında kampanya ayarlamaları</li>
+                                    <li><strong>Ölçeklenebilirlik:</strong> Büyük veri setlerinde etkili çalışma</li>
+                                    <li><strong>Maliyet Verimliliği:</strong> ROI'da %300'e varan artış</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Article 3: AI Advertising Future -->
+                    <article class="blog-post" data-category="future-tech">
+                        <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="AI Reklamcılığın Geleceği" class="post-image">
+                        <div class="post-content-wrapper">
+                            <div class="post-meta">
+                                <span class="category">Gelecek Teknolojileri</span>
+                                <span class="date">5 Ocak 2025</span>
+                                <span class="read-time">7 dk okuma</span>
+                            </div>
+                            <h3>AI Advertising: Reklamcılığın Geleceği 2025-2030</h3>
+                            <div class="post-excerpt">
+                                <p>Yapay zeka teknolojilerinin reklamcılık sektöründe yaratacağı dönüşümler ve gelecek 5 yılda bizi bekleyen yenilikler hakkında detaylı bir analiz.</p>
+                            </div>
+                            <div class="post-content">
+                                <h4>2025'te AI Advertising Trendleri</h4>
+                                <p>Bu yıl reklamcılık sektöründe öne çıkan AI trendleri:</p>
+                                <ul>
+                                    <li><strong>Hyper-Personalization:</strong> Bireysel seviyede kişiselleştirme</li>
+                                    <li><strong>Predictive Analytics:</strong> Gelecekteki davranışları tahmin etme</li>
+                                    <li><strong>Automated Creative:</strong> Otomatik içerik üretimi</li>
+                                    <li><strong>Real-time Optimization:</strong> Anında kampanya optimizasyonu</li>
+                                </ul>
+
+                                <h4>2030'a Doğru</h4>
+                                <p>Gelecek 5 yılda beklenen gelişmeler:</p>
+                                <ul>
+                                    <li><strong>Emotional AI:</strong> Duygusal zeka entegrasyonu</li>
+                                    <li><strong>Quantum Computing:</strong> Kuantum bilgisayarların reklamcılıkta kullanımı</li>
+                                    <li><strong>Brain-Computer Interfaces:</strong> Beyin-bilgisayar arayüzleri</li>
+                                    <li><strong>Holographic Advertising:</strong> Holografik reklam deneyimleri</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Article 4: English Version - AI Video Production -->
+                    <article class="blog-post english" data-category="ai-video">
+                        <img src="https://images.pexels.com/photos/8566472/pexels-photo-8566472.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="AI Video Production" class="post-image">
+                        <div class="post-content-wrapper">
+                            <div class="post-meta">
+                                <span class="category">AI Video Production</span>
+                                <span class="date">January 15, 2025</span>
+                                <span class="read-time">8 min read</span>
+                            </div>
+                            <h3>AI Video Production: The Future of Advertising in 2025</h3>
+                            <div class="post-excerpt">
+                                <p>The integration of artificial intelligence technologies into video production processes is creating revolutionary changes in the advertising industry. In this article, we examine in detail how AI-powered video production works, its advantages, and the innovations awaiting us in the future.</p>
+                            </div>
+                            <div class="post-content">
+                                <h4>How Does AI Video Production Work?</h4>
+                                <p>AI-powered video production completely transforms traditional production processes. Here are the fundamental components of this technology:</p>
+                                
+                                <h5>1. Generative AI Models</h5>
+                                <p>Modern AI video production uses advanced generative AI models like GPT-4, DALL-E, and Stable Diffusion. These models:</p>
+                                <ul>
+                                    <li>Generate visual content from text descriptions</li>
+                                    <li>Analyze existing images to create new content in similar styles</li>
+                                    <li>Learn different artistic styles and aesthetic approaches</li>
+                                    <li>Continuously improve and enhance themselves</li>
+                                </ul>
+
+                                <h5>2. Neural Network Architecture</h5>
+                                <p>Neural networks used in video production mimic the working principle of the human brain:</p>
+                                <ul>
+                                    <li><strong>Convolutional Neural Networks (CNN):</strong> Define and analyze visual features</li>
+                                    <li><strong>Recurrent Neural Networks (RNN):</strong> Track changes over time</li>
+                                    <li><strong>Transformer Models:</strong> Learn long-term dependencies</li>
+                                </ul>
+
+                                <h4>Advantages of AI Video Production</h4>
+                                
+                                <h5>Speed and Efficiency</h5>
+                                <p>While traditional video production takes weeks, AI-powered production can be completed in days. This process provides:</p>
+                                <ul>
+                                    <li>85% faster production time</li>
+                                    <li>24/7 working capacity</li>
+                                    <li>Instant revision capability</li>
+                                    <li>Parallel project management</li>
+                                </ul>
+
+                                <h5>Cost Optimization</h5>
+                                <p>AI video production is much more economical compared to traditional methods:</p>
+                                <ul>
+                                    <li>Elimination of studio rental costs</li>
+                                    <li>Minimization of actor and equipment costs</li>
+                                    <li>Prevention of shooting errors</li>
+                                    <li>Scalable production capacity</li>
+                                </ul>
+
+                                <h4>Innovations Awaiting Us in 2025</h4>
+                                
+                                <h5>Real-time AI Video Generation</h5>
+                                <p>In the future, AI systems will be able to generate videos in real-time. This technology will enable:</p>
+                                <ul>
+                                    <li>Instant content generation during live broadcasts</li>
+                                    <li>Personalized advertising experiences</li>
+                                    <li>Interactive video content</li>
+                                    <li>Dynamic pricing and product display</li>
+                                </ul>
+
+                                <h4>Sword Nest's AI Video Production Approach</h4>
+                                <p>At Sword Nest, we combine AI technologies with human creativity. This hybrid approach:</p>
+                                <ul>
+                                    <li>Utilizes AI's speed and efficiency</li>
+                                    <li>Preserves the depth of human creativity</li>
+                                    <li>Produces original content suitable for brand identity</li>
+                                    <li>Uses continuously learning and evolving systems</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Article 5: English Version - Neural Network Marketing -->
+                    <article class="blog-post english" data-category="neural-marketing">
+                        <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2595&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Neural Network Marketing" class="post-image">
+                        <div class="post-content-wrapper">
+                            <div class="post-meta">
+                                <span class="category">AI Advertising</span>
+                                <span class="date">January 10, 2025</span>
+                                <span class="read-time">6 min read</span>
+                            </div>
+                            <h3>Neural Network Marketing: Revolution in Target Audience Analysis</h3>
+                            <div class="post-excerpt">
+                                <p>The use of neural networks in marketing strategies is completely transforming target audience analysis and campaign optimization. How does this technology work and why is it so effective?</p>
+                            </div>
+                            <div class="post-content">
+                                <h4>What is Neural Network Marketing?</h4>
+                                <p>Neural Network Marketing is an approach that optimizes marketing strategies using artificial neural networks. This system:</p>
+                                <ul>
+                                    <li>Analyzes large datasets</li>
+                                    <li>Detects complex patterns</li>
+                                    <li>Predicts future behaviors</li>
+                                    <li>Creates personalized campaigns</li>
+                                </ul>
+
+                                <h4>How Does It Work?</h4>
+                                <p>The Neural Network Marketing system follows these steps:</p>
+                                <ol>
+                                    <li><strong>Data Collection:</strong> User data is collected from various sources</li>
+                                    <li><strong>Data Processing:</strong> Raw data is cleaned and prepared for analysis</li>
+                                    <li><strong>Pattern Recognition:</strong> AI detects user behavior patterns</li>
+                                    <li><strong>Segmentation:</strong> Target audience is automatically divided into segments</li>
+                                    <li><strong>Campaign Optimization:</strong> Optimized campaigns are created for each segment</li>
+                                </ol>
+
+                                <h4>Advantages</h4>
+                                <ul>
+                                    <li><strong>High Accuracy:</strong> Up to 95% prediction accuracy</li>
+                                    <li><strong>Real-time Optimization:</strong> Instant campaign adjustments</li>
+                                    <li><strong>Scalability:</strong> Effective operation on large datasets</li>
+                                    <li><strong>Cost Efficiency:</strong> Up to 300% increase in ROI</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="blog-cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>AI REKLAMCILIĞIN GELECEĞİNİ BİRLİKTE YAZALIM</h2>
+                    <p>Yapay zeka destekli reklam stratejileri ile markanızı geleceğe taşıyın</p>
+                    <a href="iletisim.html" class="cta-button">
+                        <span>ÜCRETSİZ DANIŞMANLIK</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div id="footer">
+            <div id="footer-content">
+                <div id="footer-socials">
+                    
+                </div>
+                <div id="footer-nav-links" style="text-align:left; margin-top:20px; display:inline-block; vertical-align:middle; margin-right:40px;">
+                    <a href="index.html" style="color:#A0A0A0; text-decoration:none; margin-right:18px;">Ana Sayfa</a>
+                    <a href="hakkimizda.html" style="color:#A0A0A0; text-decoration:none; margin-right:18px;">Hakkımızda</a>
+                    <a href="projeler.html" style="color:#A0A0A0; text-decoration:none; margin-right:18px;">Projeler</a>
+                    <a href="blog.html" style="color:#A0A0A0; text-decoration:none; margin-right:18px;">Blog</a>
+                    <a href="iletisim.html" style="color:#A0A0A0; text-decoration:none;">İletişim</a>
+                </div>
+                <span style="display:inline-block; vertical-align:middle; margin-left:32px;">
+                    <img src="images/doruksurucukursu.webp" alt="Doruk Sürücü Kursu" class="footer-logo-glow" style="height:44px; width:auto;">
+                </span>
+                <div id="footer-text">
+                    <p>© 2025 <span class="footer-brand">Sword Nest</span>. Tüm Hakları Saklıdır.</p>
+                    <p>Sitede yer alan tüm görseller ve video prodüksiyonları <span class="footer-brand">Sword Nest</span>'e aittir.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+    <script src="assets/scripts/event-manager.js"></script>
+    <script src="assets/scripts/navigation.js"></script>
+    <script src="assets/scripts/blog.js"></script>
+
+    <div id="cookie-consent" class="cookie-consent">
+        <div class="cookie-container">
+            <div class="cookie-content">
+                <div class="cookie-icon">
+                    <i class="fas fa-cookie-bite"></i>
+                </div>
+                <div class="cookie-text">
+                    <h4>Dijital Kılıcımızı Keskinleştiriyoruz 🗡️</h4>
+                    <p>Deneyiminizi kişiselleştirmek ve AI destekli analizlerimizi güçlendirmek için çerezler kullanıyoruz.</p>
+                </div>
+                <div class="cookie-actions">
+                    <button class="cookie-btn cookie-accept">
+                        <i class="fas fa-check"></i>
+                        Kabul Et
+                    </button>
+                    <button class="cookie-btn cookie-settings">
+                        <i class="fas fa-cog"></i>
+                        Ayarlar
+                    </button>
+                    <button class="cookie-btn cookie-reject">
+                        <i class="fas fa-times"></i>
+                        Reddet
+                    </button>
+                </div>
+            </div>
+            
+            <div class="cookie-details" style="display: none;">
+                <div class="cookie-category">
+                    <div class="category-header">
+                        <input type="checkbox" id="necessary-cookies" checked disabled>
+                        <label for="necessary-cookies">
+                            <strong>Zorunlu Çerezler</strong>
+                            <span>Web sitesinin temel işlevleri için gereklidir</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="cookie-category">
+                    <div class="category-header">
+                        <input type="checkbox" id="analytics-cookies" checked>
+                        <label for="analytics-cookies">
+                            <strong>Analitik Çerezler</strong>
+                            <span>Ziyaretçi davranışlarını anlamamıza yardımcı olur</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="cookie-category">
+                    <div class="category-header">
+                        <input type="checkbox" id="marketing-cookies" checked>
+                        <label for="marketing-cookies">
+                            <strong>Pazarlama Çerezleri</strong>
+                            <span>Size özel içerik ve reklamlar sunmamızı sağlar</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="cookie-save">
+                    <button class="cookie-btn cookie-save-settings">
+                        <i class="fas fa-save"></i>
+                        Ayarları Kaydet
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/scripts/cookie-consent.js"></script>
+</body>
+</html> 

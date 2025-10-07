@@ -1,0 +1,240 @@
+SWORD NEST WEBSITE - COMPREHENSIVE PURPOSE DOCUMENTATION
+========================================================
+
+PROJECT OVERVIEW
+===============
+Sword Nest is a professional AI-powered advertising agency website built for a Turkish marketing company based in Istanbul. The website showcases the agency's expertise in artificial intelligence-driven advertising, video production, and brand strategy services.
+
+CORE FUNCTIONALITY
+==================
+
+1. WEBSITE STRUCTURE & NAVIGATION
+---------------------------------
+- Multi-page website with 4 main sections: Home, About, Projects, Contact
+- Responsive design with automatic mobile detection and redirection
+- Smooth page transitions using AJAX and custom page loader system
+- Sticky navigation with active page highlighting
+- Mobile-first approach with separate mobile.html for mobile devices
+
+2. MAIN TECHNOLOGIES & FRAMEWORKS
+---------------------------------
+- HTML5 with semantic markup and SEO optimization
+- CSS3 with modern features (Grid, Flexbox, Custom Properties)
+- Vanilla JavaScript (ES6+) with modular architecture
+- GSAP (GreenSock) for advanced animations
+- Locomotive Scroll for smooth scrolling experience
+- ScrollTrigger for scroll-based animations
+
+3. KEY FEATURES & COMPONENTS
+----------------------------
+
+A. SWORD ANIMATION SYSTEM
+-------------------------
+- Custom SwordAnimation class for interactive sword sequence animations
+- 118-frame sword animation sequence (0001.png to 0118.png)
+- Multiple animation modes: scroll-based, rotation, follow mouse, fixed
+- Optimized image loading with priority queue system
+- Canvas-based rendering with hardware acceleration
+- Responsive sizing (small, medium, full)
+- Performance monitoring and debug functions
+
+B. PAGE TRANSITION SYSTEM
+-------------------------
+- Custom PageLoader class for smooth page transitions
+- Sword slash animation during page changes
+- AJAX-based content loading without full page refresh
+- Browser history API integration
+- Meta tag and title updates
+- CSS file management for page-specific styles
+- Script reinitialization after page loads
+
+C. RESPONSIVE DESIGN SYSTEM
+---------------------------
+- Automatic mobile device detection
+- Separate mobile.html for mobile users
+- Responsive breakpoints and adaptive layouts
+- Touch-friendly mobile navigation
+- Optimized video embeds for different screen sizes
+
+D. ANIMATION & INTERACTION SYSTEM
+---------------------------------
+- GSAP-powered scroll animations
+- Parallax effects and scroll-triggered animations
+- Video container glow effects
+- Text animations with staggered reveals
+- Navigation glow effects and hover states
+- Particle system configurations
+
+E. SEO & META SYSTEM
+--------------------
+- Comprehensive meta tags for all pages
+- Open Graph and Twitter Card support
+- Schema.org structured data markup
+- Multi-language support (Turkish/English)
+- Geographic targeting (Istanbul, Turkey)
+- Canonical URLs and robots directives
+
+F. COOKIE CONSENT SYSTEM
+------------------------
+- GDPR-compliant cookie consent management
+- Granular cookie preferences (necessary, analytics, marketing)
+- Google Analytics integration
+- User preference storage and retrieval
+- Animated notification system
+
+G. CONTACT & COMMUNICATION
+--------------------------
+- Contact form with validation
+- WhatsApp integration
+- Social media links (Instagram)
+- Google Maps integration
+- Business hours and location information
+
+4. PAGE-SPECIFIC FUNCTIONALITY
+==============================
+
+HOME PAGE (index.html)
+----------------------
+- Hero section with rotating text animation
+- Multiple video showcases with YouTube embeds
+- Mission and vision statements
+- Sword animation on canvas element
+- Smooth scroll navigation
+- Footer with social links
+
+ABOUT PAGE (hakkimizda.html)
+----------------------------
+- Company mission and vision details
+- AI technology explanations
+- Team information and expertise areas
+- Innovation lab showcase
+- Custom CSS styling for about page
+
+PROJECTS PAGE (projeler.html)
+-----------------------------
+- Portfolio showcase with filtering system
+- Project categories and case studies
+- Interactive project cards
+- Modal system for project details
+- Statistics and achievements display
+- Custom CSS for projects layout
+
+CONTACT PAGE (iletisim.html)
+----------------------------
+- Contact form with validation
+- Interactive map integration
+- FAQ accordion system
+- Contact information display
+- Social media integration
+- Custom CSS for contact page
+
+MOBILE VERSION (mobile.html)
+----------------------------
+- Dedicated mobile-optimized experience
+- Touch-friendly navigation
+- Simplified animations for mobile performance
+- Mobile-specific layout and interactions
+- Optimized for mobile browsers
+
+5. PERFORMANCE OPTIMIZATIONS
+============================
+
+JAVASCRIPT OPTIMIZATIONS
+------------------------
+- Modular code architecture
+- Event delegation and debouncing
+- Lazy loading for images and videos
+- Optimized scroll handlers
+- Memory management for animations
+- Error handling and debugging tools
+
+CSS OPTIMIZATIONS
+-----------------
+- Critical CSS inlining
+- Hardware-accelerated animations
+- Minimal reflow/repaint operations
+- Efficient selectors and specificity
+- Responsive design best practices
+
+MEDIA OPTIMIZATIONS
+-------------------
+- Video lazy loading with Intersection Observer
+- YouTube embed optimization
+- Image sequence preloading
+- WebP format support
+- Responsive image sizing
+
+6. ACCESSIBILITY & SEO
+======================
+
+ACCESSIBILITY FEATURES
+---------------------
+- Semantic HTML5 markup
+- ARIA labels and roles
+- Keyboard navigation support
+- Screen reader compatibility
+- Color contrast compliance
+- Focus management
+
+SEO FEATURES
+------------
+- Structured data markup (Schema.org)
+- Meta descriptions and keywords
+- Open Graph and Twitter Cards
+- Canonical URLs
+- Sitemap.xml generation
+- Robots.txt configuration
+
+7. BROWSER COMPATIBILITY
+========================
+- Modern browser support (Chrome 80+, Firefox 75+, Safari 13+, Edge 80+)
+- Progressive enhancement approach
+- Fallback mechanisms for older browsers
+- Cross-browser testing and optimization
+
+8. SECURITY & PRIVACY
+=====================
+- GDPR-compliant cookie management
+- Secure form handling
+- XSS protection
+- Content Security Policy considerations
+- Privacy-focused analytics
+
+9. DEPLOYMENT & HOSTING
+=======================
+- GitHub Pages deployment
+- Custom domain configuration (swordnest.com)
+- CDN integration for assets
+- SSL certificate support
+- Performance monitoring
+
+10. DEVELOPMENT TOOLS
+=====================
+- Debug functions for sword animation
+- Performance monitoring tools
+- Console logging for development
+- Error tracking and reporting
+- Browser developer tools integration
+
+BUSINESS PURPOSE
+================
+This website serves as the primary digital presence for Sword Nest, an AI-powered advertising agency, showcasing their capabilities in:
+- Artificial Intelligence marketing solutions
+- Video production and brand films
+- Neural network advertising campaigns
+- Multi-sector marketing strategies
+- Innovation and technology leadership
+
+The website is designed to attract potential clients, showcase portfolio work, and establish Sword Nest as a leader in AI-driven advertising technology in Turkey and beyond.
+
+TECHNICAL ARCHITECTURE
+======================
+- Single Page Application (SPA) experience with multi-page structure
+- Component-based JavaScript architecture
+- CSS custom properties for theming
+- Responsive design system
+- Performance-optimized animations
+- SEO-optimized content structure
+- Accessibility-compliant interface
+
+This comprehensive website demonstrates modern web development best practices while serving the specific business needs of an AI-focused advertising agency. 

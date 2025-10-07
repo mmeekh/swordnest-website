@@ -1,0 +1,2367 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+    (function() {
+        // Desktop cihaz tespiti
+        const isDesktop = window.innerWidth > 768 && 
+                         !/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        // Eğer desktop cihazsa ve mobile.html'deysek ana sayfaya yönlendir
+        if (isDesktop) {
+            console.log('🖥️ Desktop cihaz tespit edildi, ana sayfaya yönlendiriliyor...');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 100);
+        } else {
+            console.log('📱 Mobil cihaz tespit edildi, mobile interface yükleniyor...');
+        }
+    })();
+    </script>
+    <title>Sword Nest - Yapay Zeka Destekli Reklam Ajansı</title>
+    <meta name="description" content="AI ve insan yaratıcılığının kesişiminde yeni nesil reklam stratejileri">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-bg: #0A0A0A;
+            --secondary-bg: #1A1A1A;
+            --card-bg: #1F1F1F;
+            --accent-green: #00FF88;
+            --accent-blue: #00D4FF;
+            --accent-orange: #FF6B35;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0A0;
+            --border-color: #333;
+            --glow-green: rgba(0, 255, 136, 0.3);
+            --glow-blue: rgba(0, 212, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        .desktop-redirect-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid var(--accent-green);
+            box-shadow: 0 0 30px var(--glow-green);
+            z-index: 10000;
+            display: none;
+        }
+
+        .desktop-redirect-message.show {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none !important;
+        }
+
+        .logo .sword {
+            color: var(--accent-green);
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #111;
+            z-index: 100;
+            transition: transform 0.3s;
+            transform: translateX(-100vw);
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu a {
+            color: #fff;
+            font-size: 1.3rem;
+            margin: 12px 0;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+
+        .mobile-menu a:hover {
+            color: #00FF88;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: #fff;
+            z-index: 10;
+        }
+
+        /* Main Content */
+        .main {
+            margin-top: 70px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 60px 20px 40px;
+            background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, var(--glow-green) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, var(--glow-blue) 0%, transparent 50%);
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(28px, 8vw, 36px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+        }
+
+        .stat {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 0.2em;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .infinity-rgb {
+            font-size: 2.8rem;
+            font-weight: bold;
+            display: inline-block;
+            background: linear-gradient(270deg, #00FF88, #00D4FF, #FF6B35, #00FF88);
+            background-size: 600% 600%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: infinity-rgb-anim 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px #00FF88);
+        }
+        @keyframes infinity-rgb-anim {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Service Cards Slider */
+        .services {
+            padding: 40px 0;
+            background: var(--secondary-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+
+        .services-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 0 20px 20px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .services-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .service-card {
+            flex: 0 0 280px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            scroll-snap-align: start;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-green);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .service-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .service-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Video Showcase */
+        .videos {
+            padding: 40px 20px;
+            background: var(--primary-bg);
+        }
+
+        .video-slider {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .video-item {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .video-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .video-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .video-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .video-metrics {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .metric {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--accent-green);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Blog Section */
+        .blog {
+            padding: 40px 0;
+            background: var(--primary-bg);
+        }
+
+        .blog-slider {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+                 .blog-card {
+             background: var(--card-bg);
+             border-radius: 16px;
+             overflow: hidden;
+             border: 1px solid var(--border-color);
+             transition: all 0.3s ease;
+             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+             cursor: pointer;
+         }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-green);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.15);
+        }
+
+        .blog-card.featured {
+            border: 2px solid var(--accent-green);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.1);
+            position: relative;
+        }
+
+        .blog-card.featured::after {
+            content: 'ÖNE ÇIKAN';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+            color: var(--primary-bg);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover .blog-image {
+            transform: scale(1.05);
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .blog-meta span {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .blog-category {
+            color: var(--accent-green) !important;
+            font-weight: 700;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 4px 10px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+
+
+        .blog-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .blog-excerpt {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .blog-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .blog-tag {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent-blue);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+                 .blog-cta {
+             margin-top: 30px;
+         }
+
+         .read-more-indicator {
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             gap: 8px;
+             margin-top: 15px;
+             color: var(--accent-green);
+             font-size: 0.9rem;
+             font-weight: 600;
+             border-top: 1px solid rgba(0, 255, 136, 0.2);
+             padding-top: 15px;
+             transition: all 0.3s ease;
+         }
+
+         .blog-card:hover .read-more-indicator {
+             color: var(--accent-blue);
+             transform: translateX(5px);
+         }
+
+         .blog-card:hover .read-more-indicator i {
+             transform: translateX(3px);
+         }
+
+         /* Blog Modal */
+         .blog-modal {
+             display: none;
+             position: fixed;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             background: rgba(0, 0, 0, 0.9);
+             z-index: 10000;
+             padding: 20px;
+             overflow-y: auto;
+         }
+
+         .blog-modal.active {
+             display: flex;
+             align-items: flex-start;
+             justify-content: center;
+             animation: modalFadeIn 0.3s ease-out;
+         }
+
+         @keyframes modalFadeIn {
+             from {
+                 opacity: 0;
+                 transform: scale(0.95);
+             }
+             to {
+                 opacity: 1;
+                 transform: scale(1);
+             }
+         }
+
+         .blog-modal-content {
+             background: var(--card-bg);
+             border-radius: 16px;
+             max-width: 800px;
+             width: 100%;
+             margin: 20px auto;
+             position: relative;
+             border: 1px solid var(--border-color);
+             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+             max-height: 90vh;
+             overflow-y: auto;
+         }
+
+         .blog-modal-header {
+             background: var(--card-bg);
+             border-bottom: 1px solid var(--border-color);
+             padding: 20px;
+             border-radius: 16px 16px 0 0;
+             z-index: 1;
+         }
+
+         .blog-modal-close {
+             position: absolute;
+             top: 15px;
+             right: 15px;
+             background: rgba(255, 255, 255, 0.1);
+             border: none;
+             color: var(--text-primary);
+             font-size: 24px;
+             width: 40px;
+             height: 40px;
+             border-radius: 50%;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             cursor: pointer;
+             transition: all 0.3s ease;
+             backdrop-filter: blur(10px);
+         }
+
+         .blog-modal-close:hover {
+             background: rgba(255, 255, 255, 0.2);
+             transform: scale(1.1);
+         }
+
+         .blog-modal-image {
+             width: 100%;
+             height: 250px;
+             object-fit: cover;
+             border-radius: 12px;
+             margin-bottom: 20px;
+         }
+
+         .blog-modal-body {
+             padding: 0 20px 20px;
+         }
+
+         .blog-modal h1 {
+             font-size: 1.8rem;
+             font-weight: 700;
+             margin-bottom: 15px;
+             color: var(--text-primary);
+             line-height: 1.3;
+         }
+
+         .blog-modal-meta {
+             display: flex;
+             gap: 15px;
+             margin-bottom: 25px;
+             flex-wrap: wrap;
+             align-items: center;
+         }
+
+         .blog-modal-content h2,
+         .blog-modal-content h3,
+         .blog-modal-content h4 {
+             color: var(--text-primary);
+             margin: 25px 0 15px;
+             font-weight: 600;
+         }
+
+         .blog-modal-content h2 {
+             font-size: 1.4rem;
+             color: var(--accent-green);
+         }
+
+         .blog-modal-content h3 {
+             font-size: 1.2rem;
+             color: var(--accent-blue);
+         }
+
+         .blog-modal-content h4 {
+             font-size: 1.1rem;
+         }
+
+         .blog-modal-content p {
+             color: var(--text-secondary);
+             line-height: 1.7;
+             margin-bottom: 20px;
+             font-size: 1rem;
+         }
+
+         .blog-modal-content ul,
+         .blog-modal-content ol {
+             margin: 20px 0;
+             padding-left: 25px;
+         }
+
+         .blog-modal-content li {
+             color: var(--text-secondary);
+             margin-bottom: 8px;
+             line-height: 1.6;
+         }
+
+         .blog-modal-content strong {
+             color: var(--text-primary);
+             font-weight: 600;
+         }
+
+        /* FAQ Section */
+        .faq {
+            padding: 40px 20px;
+            background: var(--secondary-bg);
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(0, 255, 136, 0.05);
+        }
+
+        .faq-question h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .faq-icon {
+            color: var(--accent-green);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        .faq-answer-content {
+            padding: 0 20px 20px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 50px 20px;
+            background: linear-gradient(135deg, var(--secondary-bg) 0%, var(--primary-bg) 100%);
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta p {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-green);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .quick-contact {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .instagram {
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+            color: white;
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 30px 20px;
+            background: var(--primary-bg);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer p {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: slideInUp 0.6s ease forwards;
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            .services-slider {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                display: grid;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .video-slider {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 30px;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .cta-buttons {
+                flex-direction: row;
+                max-width: none;
+                justify-content: center;
+            }
+        }
+
+        /* YENİ EKLENECEK KOD */
+        section[id] {
+            scroll-margin-top: 75px; /* Sabit menü yüksekliğine göre ayarlayın */
+        }
+
+        .cookie-consent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1001; /* Her şeyin üstünde */
+            
+            /* Modern Cam Efekti */
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            /* Üstte Parlayan Çizgi ve Gölge */
+            border-top: 1px solid var(--accent-green);
+            box-shadow: 0 -5px 30px rgba(0, 255, 136, 0.15);
+
+            padding: 20px;
+
+            /* Animasyonlu Giriş */
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .cookie-consent.show {
+            transform: translateY(0);
+        }
+
+        /* Banner İçeriği (Yazı ve Butonlar) */
+        .cookie-content {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Varsayılan olarak ortalı */
+            flex-direction: column; /* Mobil için dikey hizalama */
+            text-align: center;
+            gap: 15px;
+        }
+
+        .cookie-text h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Animasyonlu Çerez İkonu */
+        .cookie-text h4 .cookie-icon {
+            display: inline-block;
+            animation: cookie-spin 3s linear infinite;
+            margin-left: 8px;
+            vertical-align: -2px;
+        }
+
+        @keyframes cookie-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cookie-text p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        .cookie-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        /* Genel Buton Stili */
+        .cookie-btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 50px; /* Tam yuvarlak kenarlar */
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        /* Kabul Butonu */
+        .cookie-accept {
+            background: linear-gradient(45deg, var(--accent-green), var(--accent-blue));
+            color: var(--primary-bg);
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.2);
+        }
+
+        /* Reddet Butonu */
+        .cookie-reject {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        /* Butonlara Hover Efekti */
+        .cookie-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        .cookie-reject:hover {
+            border-color: var(--text-secondary);
+            color: var(--text-primary);
+        }
+
+        @media (min-width: 480px) {
+            .cookie-content {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+            .cookie-text p {
+                max-width: 100%;
+                margin: 0;
+            }
+            .cookie-actions {
+                margin-top: 0;
+            }
+        }
+        .footer-logo-glow {
+            animation: footerLogoSpin 6s linear infinite;
+            border-radius: 50%;
+            background: transparent;
+        }
+        @keyframes footerLogoSpin {
+            0% {
+                transform: perspective(400px) rotateY(0deg);
+            }
+            100% {
+                transform: perspective(400px) rotateY(-360deg);
+            }
+        }
+        .footer-brand {
+            background: linear-gradient(90deg, #00FF88, #00D4FF, #FF6B35, #00FF88);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            animation: footerBrandGradient 3s linear infinite;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        @keyframes footerBrandGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body id="page-top">
+    <div class="desktop-redirect-message" id="desktop-message">
+        <div class="redirect-content">
+            <i class="fas fa-desktop" style="font-size: 3rem; color: var(--accent-green); margin-bottom: 20px;"></i>
+            <h2>Masaüstü deneyimi için yönlendiriliyorsunuz...</h2>
+            <p style="margin: 15px 0; color: var(--text-secondary);">Daha iyi bir deneyim için ana sayfaya yönlendirileceksiniz.</p>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 20px;">
+                <i class="fas fa-spinner fa-spin" style="color: var(--accent-blue);"></i>
+                <span style="color: var(--text-secondary);">Yönlendiriliyor...</span>
+            </div>
+        </div>
+    </div>
+    <header class="header">
+        <a href="#page-top" class="logo" id="logo-link">
+            <span class="sword">SWORD</span> NEST
+        </a>
+        <button class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+    <nav class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" onclick="toggleMenu()" style="position:absolute;top:20px;right:20px;font-size:2rem;background:none;border:none;color:#fff;z-index:10;">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#page-top">Ana Sayfa</a>
+        <a href="#services">Hizmetlerimiz</a>
+        <a href="#videos">Projeler</a>
+        <a href="#blog">Blog</a>
+        <a href="#faq">SSS</a>
+        <a href="#contact">İletişim</a>
+    </nav>
+    <div id="menu-overlay" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.6);z-index:99;"></div>
+
+    <main class="main">
+        <section class="hero" id="hero">
+            <div class="hero-content">
+                <h1>Yapay Zeka × İnsan Yaratıcılığı</h1>
+                <p>Dijital dünyanın gürültüsü içinde kaybolmayan, akılda kalıcı kampanyalar üretiyoruz</p>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">AI</span>
+                        <span class="stat-label">Destekli</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">360°</span>
+                        <span class="stat-label">Çözümler</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number infinity-rgb">∞</span>
+                        <span class="stat-label">Potansiyel</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="services" id="services">
+            <h2 class="section-title">Hizmetlerimiz</h2>
+            <div class="services-slider">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>AI Video Üretimi</h3>
+                    <p>Yapay zeka destekli sinematik video prodüksiyonu ve reklam filmleri</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Neural Marketing</h3>
+                    <p>Sinir ağları ile hedef kitle analizi ve kişiselleştirilmiş kampanyalar</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Marka Stratejisi</h3>
+                    <p>AI destekli marka dönüşümü ve dijital pazarlama stratejileri</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Performans Analizi</h3>
+                    <p>Gerçek zamanlı kampanya optimizasyonu ve predictive analytics</p>
+                </div>
+            </div>
+        </section>
+        <section class="videos" id="videos">
+            <h2 class="section-title">Başarı Hikayeleri</h2>
+            <div class="video-slider">
+                <div class="video-item">
+                    <div class="video-header">
+                        <h3 class="video-title">Doruk Sürücü Kursu</h3>
+                        <p class="video-description">Yenilikçi yaklaşımlarımızla gerçekleştirdiğimiz son çalışma.</p>
+                        <div class="video-metrics">
+                        </div>
+                    </div>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/jbnQrFmqEYg?si=zLDAdxbx8kqEiPDC" 
+                                title="YouTube video player" 
+                                allowfullscreen loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-header">
+                        <h3 class="video-title">Sword Nest Nedir?</h3>
+                        <p class="video-description">Marka kimliğimiz ve vizyonumuz.</p>
+                        <div class="video-metrics">
+                        </div>
+                    </div>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/7ZEWG9PAIqY?si=x5qxag0Ii6lX94-K" 
+                                title="Sword Nest Nedir?" 
+                                allowfullscreen loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-header">
+                        <h3 class="video-title">Lojistikte Güç ve Hız</h3>
+                        <p class="video-description">AI destekli lojistik optimizasyonu kampanyası</p>
+                        <div class="video-metrics">
+                        </div>
+                    </div>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/8cTzFwAalJE?si=Fgx3u_e1YpAU8zGd" 
+                                title="Lojistikte Güç ve Hız" 
+                                allowfullscreen loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-header">
+                        <h3 class="video-title">Projeniz Bitmeden Tanıtımı Hazır</h3>
+                        <p class="video-description">İnşaat sektörü için öncü yaklaşım</p>
+                        <div class="video-metrics">
+                        </div>
+                    </div>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/aZGH7VTsdXY?si=YP-L4F3gYQKWeo3z" 
+                                title="Projeniz Bitmeden Tanıtımı Hazır" 
+                                allowfullscreen loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-header">
+                        <h3 class="video-title">Otel Reklamcılığında Yeni Dönem</h3>
+                        <p class="video-description">Turizm sektörü dijital dönüşümü</p>
+                        <div class="video-metrics">
+                        </div>
+                    </div>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/tq9bNZ_LZZ8?si=tJaAv1ah8aH2nFKM" 
+                                title="Otel Reklamcılığında Yeni Dönem" 
+                                allowfullscreen loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-header">
+                        <h3 class="video-title">Geleceğin Eğitimi</h3>
+                        <p class="video-description">Eğitim teknolojileri yenilikleri</p>
+                        <div class="video-metrics">
+                        </div>
+                    </div>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/qS3IS0lpj7o?si=0Em_yQLBwnmsPOsu" 
+                                title="Geleceğin Eğitimi" 
+                                allowfullscreen loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="blog" id="blog">
+            <h2 class="section-title">AI Blog</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 40px; padding: 0 20px;">
+                Yapay zeka video üretimi ve reklamcılığın geleceği hakkında uzman görüşleri
+            </p>
+            <div class="blog-slider">
+                
+                                 <!-- Blog Post 1: AI Video Production -->
+                 <article class="blog-card featured" onclick="openBlogModal('blog1')">
+                     <img src="https://images.pexels.com/photos/8566472/pexels-photo-8566472.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Yapay Zeka Video Üretimi" class="blog-image">
+                     <div class="blog-content">
+                         <div class="blog-meta">
+                             <span class="blog-category">AI Video Üretimi</span>
+                             <span class="blog-date">15 Ocak 2025</span>
+                             <span class="blog-read-time">8 dk okuma</span>
+                         </div>
+                         <h3>Yapay Zeka Video Üretimi: 2025'te Reklamcılığın Geleceği</h3>
+                         <p class="blog-excerpt">
+                             Yapay zeka teknolojilerinin video üretim süreçlerine entegrasyonu, reklamcılık sektöründe devrim niteliğinde değişiklikler yaratıyor. AI destekli video üretiminin nasıl çalıştığını ve gelecekte bizi bekleyen yenilikleri keşfedin.
+                         </p>
+                         <div class="blog-tags">
+                             <span class="blog-tag">AI</span>
+                             <span class="blog-tag">Video Üretimi</span>
+                             <span class="blog-tag">Reklamcılık</span>
+                         </div>
+                         <div class="read-more-indicator">
+                             <i class="fas fa-chevron-right"></i>
+                             <span>Devamını Oku</span>
+                         </div>
+                     </div>
+                 </article>
+
+                                 <!-- Blog Post 2: Neural Network Marketing -->
+                 <article class="blog-card" onclick="openBlogModal('blog2')">
+                     <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2595&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Neural Network Marketing" class="blog-image">
+                     <div class="blog-content">
+                         <div class="blog-meta">
+                             <span class="blog-category">AI Reklamcılık</span>
+                             <span class="blog-date">10 Ocak 2025</span>
+                             <span class="blog-read-time">6 dk okuma</span>
+                         </div>
+                         <h3>Neural Network Marketing: Hedef Kitle Analizinde Devrim</h3>
+                         <p class="blog-excerpt">
+                             Sinir ağlarının pazarlama stratejilerinde kullanımı, hedef kitle analizini ve kampanya optimizasyonunu tamamen dönüştürüyor. Bu teknoloji nasıl çalışır ve neden bu kadar etkili?
+                         </p>
+                         <div class="blog-tags">
+                             <span class="blog-tag">Neural Network</span>
+                             <span class="blog-tag">Marketing</span>
+                             <span class="blog-tag">Analytics</span>
+                         </div>
+                         <div class="read-more-indicator">
+                             <i class="fas fa-chevron-right"></i>
+                             <span>Devamını Oku</span>
+                         </div>
+                     </div>
+                 </article>
+
+                                 <!-- Blog Post 3: AI Advertising Future -->
+                 <article class="blog-card" onclick="openBlogModal('blog3')">
+                     <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="AI Reklamcılığın Geleceği" class="blog-image">
+                     <div class="blog-content">
+                         <div class="blog-meta">
+                             <span class="blog-category">Gelecek Teknolojileri</span>
+                             <span class="blog-date">5 Ocak 2025</span>
+                             <span class="blog-read-time">7 dk okuma</span>
+                         </div>
+                         <h3>AI Advertising: Reklamcılığın Geleceği 2025-2030</h3>
+                         <p class="blog-excerpt">
+                             Yapay zeka teknolojilerinin reklamcılık sektöründe yaratacağı dönüşümler ve gelecek 5 yılda bizi bekleyen yenilikler hakkında detaylı bir analiz.
+                         </p>
+                         <div class="blog-tags">
+                             <span class="blog-tag">Future Tech</span>
+                             <span class="blog-tag">Advertising</span>
+                             <span class="blog-tag">Trends</span>
+                         </div>
+                         <div class="read-more-indicator">
+                             <i class="fas fa-chevron-right"></i>
+                             <span>Devamını Oku</span>
+                         </div>
+                     </div>
+                 </article>
+
+                 <!-- Blog Post 4: Digital Marketing Evolution -->
+                 <article class="blog-card" onclick="openBlogModal('blog4')">
+                     <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Dijital Pazarlama Evrimi" class="blog-image">
+                     <div class="blog-content">
+                         <div class="blog-meta">
+                             <span class="blog-category">Dijital Pazarlama</span>
+                             <span class="blog-date">1 Ocak 2025</span>
+                             <span class="blog-read-time">5 dk okuma</span>
+                         </div>
+                         <h3>Dijital Pazarlama Evrimi: AI ile Birlikte Dönüşüm</h3>
+                         <p class="blog-excerpt">
+                             Geleneksel pazarlama yöntemlerinden AI destekli dijital stratejilere geçiş sürecinde neler değişiyor? İşte modern pazarlamanın yeni kuralları.
+                         </p>
+                         <div class="blog-tags">
+                             <span class="blog-tag">Digital Marketing</span>
+                             <span class="blog-tag">Evolution</span>
+                             <span class="blog-tag">Strategy</span>
+                         </div>
+                         <div class="read-more-indicator">
+                             <i class="fas fa-chevron-right"></i>
+                             <span>Devamını Oku</span>
+                         </div>
+                     </div>
+                 </article>
+
+                 <!-- Blog Post 5: Creative AI in Advertising -->
+                 <article class="blog-card" onclick="openBlogModal('blog5')">
+                     <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Yaratıcı AI" class="blog-image">
+                     <div class="blog-content">
+                         <div class="blog-meta">
+                             <span class="blog-category">Yaratıcı AI</span>
+                             <span class="blog-date">28 Aralık 2024</span>
+                             <span class="blog-read-time">6 dk okuma</span>
+                         </div>
+                         <h3>Yaratıcı AI: İnsan ve Makine İşbirliği</h3>
+                         <p class="blog-excerpt">
+                             Yapay zeka ile insan yaratıcılığının buluştuğu noktada neler oluyor? Creative AI'ın reklamcılık sektöründe açtığı yeni kapıları ve fırsatları keşfedin.
+                         </p>
+                         <div class="blog-tags">
+                             <span class="blog-tag">Creative AI</span>
+                             <span class="blog-tag">İnovation</span>
+                             <span class="blog-tag">Design</span>
+                         </div>
+                         <div class="read-more-indicator">
+                             <i class="fas fa-chevron-right"></i>
+                             <span>Devamını Oku</span>
+                         </div>
+                     </div>
+                 </article>
+
+                 <!-- Blog Post 6: Data-Driven Campaigns -->
+                 <article class="blog-card" onclick="openBlogModal('blog6')">
+                     <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Veri Odaklı Kampanyalar" class="blog-image">
+                     <div class="blog-content">
+                         <div class="blog-meta">
+                             <span class="blog-category">Veri Analizi</span>
+                             <span class="blog-date">25 Aralık 2024</span>
+                             <span class="blog-read-time">7 dk okuma</span>
+                         </div>
+                         <h3>Veri Odaklı Kampanyalar: Başarının Formülü</h3>
+                         <p class="blog-excerpt">
+                             Big Data ve AI analitiklerin reklamcılık kampanyalarındaki rolü. Veriden elde edilen insights'lar nasıl başarılı kampanyalara dönüşüyor?
+                         </p>
+                         <div class="blog-tags">
+                             <span class="blog-tag">Big Data</span>
+                             <span class="blog-tag">Analytics</span>
+                             <span class="blog-tag">ROI</span>
+                         </div>
+                         <div class="read-more-indicator">
+                             <i class="fas fa-chevron-right"></i>
+                             <span>Devamını Oku</span>
+                         </div>
+                     </div>
+                 </article>
+
+                 <!-- Blog Post 7: Social Media AI -->
+                 <article class="blog-card" onclick="openBlogModal('blog7')">
+                     <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=2639&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sosyal Medya AI" class="blog-image">
+                     <div class="blog-content">
+                         <div class="blog-meta">
+                             <span class="blog-category">Sosyal Medya</span>
+                             <span class="blog-date">22 Aralık 2024</span>
+                             <span class="blog-read-time">5 dk okuma</span>
+                         </div>
+                         <h3>Sosyal Medya'da AI: Engagement'ın Yeni Kuralları</h3>
+                         <p class="blog-excerpt">
+                             AI algoritmaları sosyal medya engagement'ını nasıl optimize ediyor? Platform bazlı AI stratejileri ve gelecekteki trendler.
+                         </p>
+                         <div class="blog-tags">
+                             <span class="blog-tag">Social Media</span>
+                             <span class="blog-tag">Engagement</span>
+                             <span class="blog-tag">Algorithms</span>
+                         </div>
+                         <div class="read-more-indicator">
+                             <i class="fas fa-chevron-right"></i>
+                             <span>Devamını Oku</span>
+                         </div>
+                     </div>
+                 </article>
+
+                 <!-- Blog Post 8: E-commerce AI -->
+                 <article class="blog-card" onclick="openBlogModal('blog8')">
+                     <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2640&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="E-ticaret AI" class="blog-image">
+                     <div class="blog-content">
+                         <div class="blog-meta">
+                             <span class="blog-category">E-ticaret</span>
+                             <span class="blog-date">20 Aralık 2024</span>
+                             <span class="blog-read-time">6 dk okuma</span>
+                         </div>
+                         <h3>E-ticaret'te AI: Kişiselleştirmeden Optimizasyona</h3>
+                         <p class="blog-excerpt">
+                             Online alışveriş deneyimini AI nasıl dönüştürüyor? Product recommendation'dan dynamic pricing'e kadar e-ticaret AI çözümleri.
+                         </p>
+                         <div class="blog-tags">
+                             <span class="blog-tag">E-commerce</span>
+                             <span class="blog-tag">Personalization</span>
+                             <span class="blog-tag">UX</span>
+                         </div>
+                         <div class="read-more-indicator">
+                             <i class="fas fa-chevron-right"></i>
+                             <span>Devamını Oku</span>
+                         </div>
+                     </div>
+                 </article>
+
+            </div>
+        </section>
+
+        <section class="faq" id="faq">
+            <h2 class="section-title">Sıkça Sorulan Sorular</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h3>AI destekli video üretimi nasıl çalışır?</h3>
+                    <i class="fas fa-plus faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Yapay zeka teknolojilerini kullanarak konsept geliştirme, içerik üretimi ve optimizasyon süreçlerini gerçekleştiriyoruz. Her projeye özel stratejiler geliştiriyoruz.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h3>Hangi sektörlerde çalışıyorsunuz?</h3>
+                    <i class="fas fa-plus faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Teknoloji, sağlık, eğitim, lojistik, otel, finans, e-ticaret ve daha birçok sektörde başarılı projeler gerçekleştiriyoruz.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h3>Proje süresi ne kadar?</h3>
+                    <i class="fas fa-plus faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        AI destekli süreçlerimiz sayesinde geleneksel yöntemlere göre %85 daha hızlı çalışıyoruz. Proje büyüklüğüne göre 1-2 hafta arası sürmektedir.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h3>Minimum proje bütçesi nedir?</h3>
+                    <i class="fas fa-plus faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Her projenin kapsamı farklı olduğu için özel fiyatlandırma yapıyoruz. Size en uygun teklifi hazırlayabilmemiz için lütfen bizimle iletişime geçin.
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="cta" id="contact">
+            <h2>Geleceğin Markası Olmaya Hazır mısınız?</h2>
+            <p>AI destekli yaratıcılık ile markanızı bir sonraki seviyeye taşıyalım</p>
+            
+            <div class="cta-buttons">
+                <a href="tel:+905161622146" class="btn btn-primary">
+                    <i class="fas fa-phone"></i>
+                    Hemen Ara
+                </a>
+                <a href="#videos" class="btn btn-secondary">
+                    <i class="fas fa-play"></i>
+                    Projelerimizi İzle
+                </a>
+            </div>
+
+            <div class="quick-contact">
+                <a href="https://wa.me/905161622146" class="contact-btn whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.instagram.com/swordnest/" class="contact-btn instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/@Swordnest" class="contact-btn youtube" style="background:#FF0000; color:#fff;">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </section>
+        <div style="text-align:center; margin: 32px 0;">
+            <h2 class="footer-brand" style="font-size:1.5rem; font-weight:700; margin-bottom:18px; letter-spacing:0.02em;">Çalışmalarımız</h2>
+            <img src="images/doruksurucukursu.webp" alt="Doruk Sürücü Kursu" class="footer-logo-glow" style="height:44px; width:auto;">
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-nav-links" style="text-align:center; margin-bottom:20px;">
+            <a href="#page-top" style="color:#A0A0A0; text-decoration:none; margin-right:18px;">Ana Sayfa</a>
+            <a href="#services" style="color:#A0A0A0; text-decoration:none; margin-right:18px;">Hizmetlerimiz</a>
+            <a href="#videos" style="color:#A0A0A0; text-decoration:none; margin-right:18px;">Projeler</a>
+            <a href="#blog" style="color:#A0A0A0; text-decoration:none; margin-right:18px;">Blog</a>
+            <a href="#contact" style="color:#A0A0A0; text-decoration:none;">İletişim</a>
+        </div>
+        <div class="footer-socials" style="text-align:center; margin-bottom:20px;">
+            <a href="https://www.instagram.com/swordnest/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="color:#A0A0A0; text-decoration:none; margin-right:18px; font-size:1.2rem;"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://wa.me/905161622146" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" style="color:#A0A0A0; text-decoration:none; margin-right:18px; font-size:1.2rem;"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.youtube.com/@Swordnest" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="color:#A0A0A0; text-decoration:none; font-size:1.2rem;"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <div class="footer-text">
+            <p>© 2025 <span class="footer-brand">Sword Nest</span>. Tüm Hakları Saklıdır.</p>
+            <p>Sitede yer alan tüm görseller ve video prodüksiyonları <span class="footer-brand">Sword Nest</span>'e aittir.</p>
+        </div>
+    </footer>
+
+    <script>
+        function checkDesktopAndRedirect() {
+            const isDesktop = window.innerWidth > 768 && 
+                             !/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isDesktop) {
+                const message = document.getElementById('desktop-message');
+                if (message) {
+                    message.classList.add('show');
+                }
+                
+                // 2 saniye sonra yönlendir
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                
+                return true; // Desktop tespit edildi
+            }
+            return false; // Mobil cihaz
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const isDesktop = checkDesktopAndRedirect();
+            
+            if (!isDesktop) {
+                console.log('📱 Mobil interface başlatılıyor...');
+                // Mobil JavaScript kodları burada çalışır
+                initMobileInterface();
+            }
+        });
+
+        // Resize'da da kontrol et
+        window.addEventListener('resize', () => {
+            checkDesktopAndRedirect();
+        });
+
+        function initMobileInterface() {
+            // Mevcut mobile.html'deki tüm JavaScript kodları burada
+            
+            // Mobile Menu Toggle
+            function toggleMenu() {
+                const menu = document.getElementById('mobileMenu');
+                menu.classList.toggle('active');
+                const menuOverlay = document.getElementById('menu-overlay');
+                if (menu.classList.contains('active')) {
+                    menuOverlay.style.display = 'block';
+                } else {
+                    menuOverlay.style.display = 'none';
+                }
+            }
+
+            // Mobile Menu Link Clicks: Close menu and scroll to section
+            document.querySelectorAll('#mobileMenu a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const menu = document.getElementById('mobileMenu');
+                    const menuOverlay = document.getElementById('menu-overlay');
+                    menu.classList.remove('active');
+                    menuOverlay.style.display = 'none';
+                    // If it's a hash link, scroll smoothly
+                    const href = this.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
+
+            // FAQ Toggle
+            function toggleFAQ(element) {
+                const faqItem = element.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current item
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            }
+
+            // Logo click: scroll to top smoothly
+            const logoLink = document.getElementById('logo-link');
+            if (logoLink) {
+                logoLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // Diğer tüm mobile JavaScript fonksiyonları...
+            console.log('🗡️ Sword Nest Mobile Interface Loaded Successfully!');
+
+         // Blog Modal Functions
+         const blogData = {
+             blog1: {
+                 title: "Yapay Zeka Video Üretimi: 2025'te Reklamcılığın Geleceği",
+                 image: "https://images.pexels.com/photos/8566472/pexels-photo-8566472.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                 category: "AI Video Üretimi",
+                 date: "15 Ocak 2025",
+                 readTime: "8 dk okuma",
+                 content: `
+                     <p>Yapay zeka teknolojilerinin video üretim süreçlerine entegrasyonu, reklamcılık sektöründe devrim niteliğinde değişiklikler yaratıyor. Bu makalede, AI destekli video üretiminin nasıl çalıştığını, avantajlarını ve gelecekte bizi bekleyen yenilikleri detaylı olarak inceliyoruz.</p>
+
+                     <h2>AI Video Üretimi Nasıl Çalışır?</h2>
+                     <p>Yapay zeka destekli video üretimi, geleneksel prodüksiyon süreçlerini tamamen dönüştürüyor. İşte bu teknolojinin temel bileşenleri:</p>
+                     
+                     <h3>1. Generative AI Modelleri</h3>
+                     <p>Modern AI video üretimi, GPT-4, DALL-E ve Stable Diffusion gibi gelişmiş generative AI modellerini kullanır. Bu modeller:</p>
+                     <ul>
+                         <li>Metin açıklamalarından görsel içerik oluşturur</li>
+                         <li>Mevcut görüntüleri analiz ederek benzer stillerde yeni içerik üretir</li>
+                         <li>Farklı sanat stillerini ve estetik yaklaşımları öğrenir</li>
+                         <li>Sürekli olarak kendini geliştirir ve iyileştirir</li>
+                     </ul>
+
+                     <h3>2. Video Synthesis Pipeline</h3>
+                     <p>AI video üretim süreci şu aşamalardan oluşur:</p>
+                     <ol>
+                         <li><strong>Konsept Geliştirme:</strong> AI, marka kimliği ve hedef kitle analizine dayalı konseptler önerir</li>
+                         <li><strong>Storyboard Oluşturma:</strong> Otomatik storyboard üretimi</li>
+                         <li><strong>Görsel Üretim:</strong> Her sahne için AI destekli görsel oluşturma</li>
+                         <li><strong>Animasyon:</strong> Hareket ve geçiş efektlerinin AI ile üretilmesi</li>
+                         <li><strong>Post-Production:</strong> Renk düzeltme, ses senkronizasyonu ve final düzenlemeler</li>
+                     </ol>
+
+                     <h2>AI Video Üretiminin Avantajları</h2>
+                     
+                     <h3>Hız ve Verimlilik</h3>
+                     <p>Geleneksel video prodüksiyonu haftalar sürerken, AI destekli üretim günler içinde tamamlanabilir. Bu süreç:</p>
+                     <ul>
+                         <li>%85 daha hızlı üretim süresi</li>
+                         <li>7/24 çalışma kapasitesi</li>
+                         <li>Anında revizyon imkanı</li>
+                         <li>Paralel proje yönetimi</li>
+                     </ul>
+
+                     <h3>Sword Nest'in AI Video Üretim Yaklaşımı</h3>
+                     <p>Sword Nest olarak, AI teknolojilerini insan yaratıcılığı ile birleştiriyoruz. Bu hibrit yaklaşım:</p>
+                     <ul>
+                         <li>AI'nin hız ve verimliliğini kullanır</li>
+                         <li>İnsan yaratıcılığının derinliğini korur</li>
+                         <li>Marka kimliğine uygun özgün içerik üretir</li>
+                         <li>Sürekli öğrenen ve gelişen sistemler kullanır</li>
+                     </ul>
+                 `
+             },
+             blog2: {
+                 title: "Neural Network Marketing: Hedef Kitle Analizinde Devrim",
+                 image: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2595&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                 category: "AI Reklamcılık",
+                 date: "10 Ocak 2025",
+                 readTime: "6 dk okuma",
+                 content: `
+                     <p>Sinir ağlarının pazarlama stratejilerinde kullanımı, hedef kitle analizini ve kampanya optimizasyonunu tamamen dönüştürüyor. Bu teknoloji nasıl çalışır ve neden bu kadar etkili?</p>
+
+                     <h2>Neural Network Marketing Nedir?</h2>
+                     <p>Neural Network Marketing, yapay sinir ağlarını kullanarak pazarlama stratejilerini optimize eden bir yaklaşımdır. Bu sistem:</p>
+                     <ul>
+                         <li>Büyük veri setlerini analiz eder</li>
+                         <li>Karmaşık pattern'leri tespit eder</li>
+                         <li>Gelecekteki davranışları tahmin eder</li>
+                         <li>Kişiselleştirilmiş kampanyalar oluşturur</li>
+                     </ul>
+
+                     <h2>Nasıl Çalışır?</h2>
+                     <p>Neural Network Marketing sistemi şu adımları takip eder:</p>
+                     <ol>
+                         <li><strong>Veri Toplama:</strong> Çeşitli kaynaklardan kullanıcı verileri toplanır</li>
+                         <li><strong>Veri İşleme:</strong> Ham veriler temizlenir ve analiz için hazırlanır</li>
+                         <li><strong>Pattern Recognition:</strong> AI, kullanıcı davranış pattern'lerini tespit eder</li>
+                         <li><strong>Segmentation:</strong> Hedef kitle otomatik olarak segmentlere ayrılır</li>
+                         <li><strong>Campaign Optimization:</strong> Her segment için optimize edilmiş kampanyalar oluşturulur</li>
+                     </ol>
+
+                     <h2>Avantajları</h2>
+                     <ul>
+                         <li><strong>Yüksek Doğruluk:</strong> %95'e varan tahmin doğruluğu</li>
+                         <li><strong>Gerçek Zamanlı Optimizasyon:</strong> Anında kampanya ayarlamaları</li>
+                         <li><strong>Ölçeklenebilirlik:</strong> Büyük veri setlerinde etkili çalışma</li>
+                         <li><strong>Maliyet Verimliliği:</strong> ROI'da %300'e varan artış</li>
+                     </ul>
+
+                     <h2>Geleceğe Bakış</h2>
+                     <p>Neural Network Marketing'in gelecekte getireceği yenilikler:</p>
+                     <ul>
+                         <li>Emotional AI entegrasyonu</li>
+                         <li>Quantum computing destekli analizler</li>
+                         <li>Real-time personalization</li>
+                         <li>Cross-platform optimization</li>
+                     </ul>
+                 `
+             },
+             blog3: {
+                 title: "AI Advertising: Reklamcılığın Geleceği 2025-2030",
+                 image: "https://images.unsplash.com/photo-1535016120720-40c646be5580?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                 category: "Gelecek Teknolojileri",
+                 date: "5 Ocak 2025",
+                 readTime: "7 dk okuma",
+                 content: `
+                     <p>Yapay zeka teknolojilerinin reklamcılık sektöründe yaratacağı dönüşümler ve gelecek 5 yılda bizi bekleyen yenilikler hakkında detaylı bir analiz.</p>
+
+                     <h2>2025'te AI Advertising Trendleri</h2>
+                     <p>Bu yıl reklamcılık sektöründe öne çıkan AI trendleri:</p>
+                     <ul>
+                         <li><strong>Hyper-Personalization:</strong> Bireysel seviyede kişiselleştirme</li>
+                         <li><strong>Predictive Analytics:</strong> Gelecekteki davranışları tahmin etme</li>
+                         <li><strong>Automated Creative:</strong> Otomatik içerik üretimi</li>
+                         <li><strong>Real-time Optimization:</strong> Anında kampanya optimizasyonu</li>
+                     </ul>
+
+                     <h2>2030'a Doğru</h2>
+                     <p>Gelecek 5 yılda beklenen gelişmeler:</p>
+                     <ul>
+                         <li><strong>Emotional AI:</strong> Duygusal zeka entegrasyonu</li>
+                         <li><strong>Quantum Computing:</strong> Kuantum bilgisayarların reklamcılıkta kullanımı</li>
+                         <li><strong>Brain-Computer Interfaces:</strong> Beyin-bilgisayar arayüzleri</li>
+                         <li><strong>Holographic Advertising:</strong> Holografik reklam deneyimleri</li>
+                     </ul>
+
+                     <h2>Teknolojik Dönüşüm</h2>
+                     <p>AI'nin reklamcılıkta yaratacağı temel değişimler:</p>
+                     <ol>
+                         <li><strong>Automated Campaign Management:</strong> Tamamen otomatik kampanya yönetimi</li>
+                         <li><strong>Dynamic Content Creation:</strong> Gerçek zamanlı içerik üretimi</li>
+                         <li><strong>Advanced Attribution:</strong> Gelişmiş performans ölçümleme</li>
+                         <li><strong>Cross-platform Optimization:</strong> Platform ötesi optimizasyon</li>
+                     </ol>
+
+                     <h2>Sword Nest'in Vizyonu</h2>
+                     <p>Gelecekteki AI advertising ekosisteminde:</p>
+                     <ul>
+                         <li>İnsan-AI işbirliği modelleri</li>
+                         <li>Etik AI kullanımı standartları</li>
+                         <li>Sürdürülebilir reklam teknolojileri</li>
+                         <li>Kişisel gizlilik odaklı çözümler</li>
+                     </ul>
+                 `
+             },
+             blog4: {
+                 title: "Dijital Pazarlama Evrimi: AI ile Birlikte Dönüşüm",
+                 image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                 category: "Dijital Pazarlama",
+                 date: "1 Ocak 2025",
+                 readTime: "5 dk okuma",
+                 content: `
+                     <p>Geleneksel pazarlama yöntemlerinden AI destekli dijital stratejilere geçiş sürecinde neler değişiyor? İşte modern pazarlamanın yeni kuralları.</p>
+
+                     <h2>Dijital Dönüşümün Aşamaları</h2>
+                     <p>Pazarlama evriminin temel aşamaları:</p>
+                     <ol>
+                         <li><strong>Geleneksel Pazarlama:</strong> TV, radyo, gazete reklamları</li>
+                         <li><strong>Dijital Geçiş:</strong> Web siteleri ve e-mail kampanyaları</li>
+                         <li><strong>Sosyal Medya Dönemi:</strong> Platform bazlı pazarlama</li>
+                         <li><strong>AI Entegrasyonu:</strong> Akıllı otomatizasyon</li>
+                         <li><strong>Gelecek:</strong> Predictive ve proactive marketing</li>
+                     </ol>
+
+                     <h2>AI'nin Değiştirdiği Alanlar</h2>
+                     
+                     <h3>Content Marketing</h3>
+                     <ul>
+                         <li>Otomatik içerik üretimi</li>
+                         <li>SEO optimizasyonu</li>
+                         <li>Kişiselleştirilmiş mesajlaşma</li>
+                         <li>A/B test otomasyonu</li>
+                     </ul>
+
+                     <h3>Customer Journey</h3>
+                     <ul>
+                         <li>Müşteri yolculuğu haritalama</li>
+                         <li>Touchpoint optimizasyonu</li>
+                         <li>Predictive customer behavior</li>
+                         <li>Churn prediction</li>
+                     </ul>
+
+                     <h2>Teknoloji Stack'i</h2>
+                     <p>Modern dijital pazarlama için gerekli teknolojiler:</p>
+                     <ul>
+                         <li><strong>CRM Sistemleri:</strong> Müşteri veri yönetimi</li>
+                         <li><strong>Marketing Automation:</strong> Kampanya otomasyonu</li>
+                         <li><strong>Analytics Platformları:</strong> Veri analizi</li>
+                         <li><strong>AI Tools:</strong> Yapay zeka araçları</li>
+                     </ul>
+
+                     <h2>ROI ve Performans</h2>
+                     <p>AI destekli pazarlamanın getirdiği ölçülebilir faydalar:</p>
+                     <ul>
+                         <li>%40'a varan maliyet azalması</li>
+                         <li>%60 daha yüksek engagement oranları</li>
+                         <li>%80 daha hızlı kampanya lansmanı</li>
+                         <li>%25 daha iyi müşteri yaşam değeri</li>
+                     </ul>
+                 `
+             },
+             blog5: {
+                 title: "Yaratıcı AI: İnsan ve Makine İşbirliği",
+                 image: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                 category: "Yaratıcı AI",
+                 date: "28 Aralık 2024",
+                 readTime: "6 dk okuma",
+                 content: `
+                     <p>Yapay zeka ile insan yaratıcılığının buluştuğu noktada neler oluyor? Creative AI'ın reklamcılık sektöründe açtığı yeni kapıları ve fırsatları keşfedin.</p>
+
+                     <h2>Creative AI'ın Potansiyeli</h2>
+                     <p>Yaratıcı yapay zeka, geleneksel yaratım süreçlerini dönüştürürken:</p>
+                     <ul>
+                         <li>Sınırsız konsept üretimi sağlar</li>
+                         <li>Farklı stil ve formatlarda deneyim imkanı sunar</li>
+                         <li>Hızlı prototipleme ve test etme olanağı yaratır</li>
+                         <li>İnsan yaratıcılığını kısıtlamak yerine genişletir</li>
+                     </ul>
+
+                     <h2>İnsan-AI İşbirliği Modeli</h2>
+                     <p>Sword Nest'in geliştirdiği hibrit yaratım sürecinde:</p>
+                     <ol>
+                         <li><strong>İnsan Vizyonu:</strong> Stratejik düşünce ve yaratıcı yön</li>
+                         <li><strong>AI Üretim:</strong> Hızlı görsel ve içerik üretimi</li>
+                         <li><strong>İnsan Editörlük:</strong> Kalite kontrol ve optimizasyon</li>
+                         <li><strong>AI Optimizasyon:</strong> Performans bazlı iyileştirmeler</li>
+                     </ol>
+
+                     <h2>Avantajlar ve Fırsatlar</h2>
+                     <ul>
+                         <li>%70 daha hızlı yaratım süreci</li>
+                         <li>Sınırsız varyasyon ve A/B test imkanı</li>
+                         <li>Maliyet etkin prototipleme</li>
+                         <li>Kişiselleştirilmiş içerik üretimi</li>
+                     </ul>
+                 `
+             },
+             blog6: {
+                 title: "Veri Odaklı Kampanyalar: Başarının Formülü",
+                 image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                 category: "Veri Analizi",
+                 date: "25 Aralık 2024",
+                 readTime: "7 dk okuma",
+                 content: `
+                     <p>Big Data ve AI analitiklerin reklamcılık kampanyalarındaki rolü. Veriden elde edilen insights'lar nasıl başarılı kampanyalara dönüşüyor?</p>
+
+                     <h2>Veri Odaklı Yaklaşımın Temelleri</h2>
+                     <p>Modern reklamcılıkta veri, kampanya başarısının ana belirleyicisidir:</p>
+                     <ul>
+                         <li>Hedef kitle davranış analizi</li>
+                         <li>Gerçek zamanlı performans ölçümü</li>
+                         <li>Predictive modeling ile gelecek tahminleri</li>
+                         <li>Multi-touch attribution analizi</li>
+                     </ul>
+
+                     <h2>AI-Powered Analytics</h2>
+                     <p>Yapay zeka destekli veri analizi şu avantajları sağlar:</p>
+                     <ol>
+                         <li><strong>Pattern Recognition:</strong> Karmaşık veri setlerinde gizli pattern'leri bulma</li>
+                         <li><strong>Real-time Optimization:</strong> Anında kampanya optimizasyonu</li>
+                         <li><strong>Audience Segmentation:</strong> Dinamik hedef kitle segmentasyonu</li>
+                         <li><strong>ROI Prediction:</strong> Gelecekteki getiri tahminleri</li>
+                     </ol>
+
+                     <h2>Başarı Metrikleri</h2>
+                     <p>Veri odaklı kampanyalarda izlenen temel KPI'lar:</p>
+                     <ul>
+                         <li>Customer Acquisition Cost (CAC)</li>
+                         <li>Lifetime Value (LTV)</li>
+                         <li>Conversion Rate Optimization</li>
+                         <li>Attribution Score</li>
+                     </ul>
+
+                     <h2>Sword Nest Metodolojisi</h2>
+                     <p>Veri odaklı kampanya geliştirme sürecimiz:</p>
+                     <ul>
+                         <li>360° veri toplama ve entegrasyon</li>
+                         <li>AI destekli insight çıkarımı</li>
+                         <li>Dinamik kampanya optimizasyonu</li>
+                         <li>Sürekli öğrenme döngüsü</li>
+                     </ul>
+                 `
+             },
+             blog7: {
+                 title: "Sosyal Medya'da AI: Engagement'ın Yeni Kuralları",
+                 image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=2639&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                 category: "Sosyal Medya",
+                 date: "22 Aralık 2024",
+                 readTime: "5 dk okuma",
+                 content: `
+                     <p>AI algoritmaları sosyal medya engagement'ını nasıl optimize ediyor? Platform bazlı AI stratejileri ve gelecekteki trendler.</p>
+
+                     <h2>Sosyal Medya AI Devrimi</h2>
+                     <p>Yapay zeka, sosyal medya stratejilerini temelden değiştiriyor:</p>
+                     <ul>
+                         <li>Optimal paylaşım zamanlaması</li>
+                         <li>İçerik format optimizasyonu</li>
+                         <li>Hashtag ve trend analizi</li>
+                         <li>Influencer matching algoritmaları</li>
+                     </ul>
+
+                     <h2>Platform Bazlı AI Stratejileri</h2>
+                     
+                     <h3>Instagram AI</h3>
+                     <ul>
+                         <li>Visual content optimization</li>
+                         <li>Story completion rate analizi</li>
+                         <li>Reel performans tahminleri</li>
+                     </ul>
+
+                     <h3>TikTok Algorithm</h3>
+                     <ul>
+                         <li>Viral potansiyel analizi</li>
+                         <li>Sound ve trend takibi</li>
+                         <li>Micro-moment targeting</li>
+                     </ul>
+
+                     <h3>LinkedIn AI</h3>
+                     <ul>
+                         <li>Professional audience targeting</li>
+                         <li>B2B engagement optimization</li>
+                         <li>Thought leadership scoring</li>
+                     </ul>
+
+                     <h2>AI Destekli Content Planning</h2>
+                     <p>Yapay zeka ile içerik planlama sürecinde:</p>
+                     <ol>
+                         <li>Trend prediction ve forecast</li>
+                         <li>Competitor content analysis</li>
+                         <li>Optimal content mix planlama</li>
+                         <li>Performance forecasting</li>
+                     </ol>
+
+                     <h2>Gelecek Trendleri</h2>
+                     <ul>
+                         <li>Voice-activated social media</li>
+                         <li>AR/VR integrated campaigns</li>
+                         <li>AI-generated influencer content</li>
+                         <li>Emotion-based content delivery</li>
+                     </ul>
+                 `
+             },
+             blog8: {
+                 title: "E-ticaret'te AI: Kişiselleştirmeden Optimizasyona",
+                 image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2640&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                 category: "E-ticaret",
+                 date: "20 Aralık 2024",
+                 readTime: "6 dk okuma",
+                 content: `
+                     <p>Online alışveriş deneyimini AI nasıl dönüştürüyor? Product recommendation'dan dynamic pricing'e kadar e-ticaret AI çözümleri.</p>
+
+                     <h2>E-ticaret AI Dönüşümü</h2>
+                     <p>Yapay zeka, e-ticaret deneyimini köklü şekilde değiştiriyor:</p>
+                     <ul>
+                         <li>Kişiselleştirilmiş ürün önerileri</li>
+                         <li>Dinamik fiyatlandırma stratejileri</li>
+                         <li>Chatbot müşteri hizmetleri</li>
+                         <li>Inventory management optimizasyonu</li>
+                     </ul>
+
+                     <h2>AI-Powered Personalization</h2>
+                     <p>Kişiselleştirme teknolojilerinin temel bileşenleri:</p>
+                     <ol>
+                         <li><strong>Behavioral Tracking:</strong> Kullanıcı davranış analizi</li>
+                         <li><strong>Collaborative Filtering:</strong> Benzer kullanıcı önerisi</li>
+                         <li><strong>Content-Based Filtering:</strong> Ürün özellik bazlı öneri</li>
+                         <li><strong>Hybrid Algorithms:</strong> Karma algoritma yaklaşımları</li>
+                     </ol>
+
+                     <h2>Dynamic Pricing Intelligence</h2>
+                     <p>AI destekli dinamik fiyatlandırma stratejileri:</p>
+                     <ul>
+                         <li>Competitor price monitoring</li>
+                         <li>Demand forecasting</li>
+                         <li>Price elasticity analysis</li>
+                         <li>Revenue optimization</li>
+                     </ul>
+
+                     <h2>Customer Journey Optimization</h2>
+                     <p>AI'ın müşteri yolculuğunu nasıl optimize ettiği:</p>
+                     <ul>
+                         <li>Landing page personalization</li>
+                         <li>Product discovery enhancement</li>
+                         <li>Cart abandonment prevention</li>
+                         <li>Post-purchase experience</li>
+                     </ul>
+
+                     <h2>Conversion Rate Optimization</h2>
+                     <p>AI destekli CRO stratejileri:</p>
+                     <ul>
+                         <li>A/B test automation</li>
+                         <li>Heat map analysis</li>
+                         <li>User flow optimization</li>
+                         <li>Exit intent prediction</li>
+                     </ul>
+
+                     <h2>E-ticaret Geleceği</h2>
+                     <ul>
+                         <li>Visual search technology</li>
+                         <li>Voice commerce integration</li>
+                         <li>AR/VR shopping experiences</li>
+                         <li>AI-powered virtual assistants</li>
+                     </ul>
+                 `
+             }
+         };
+
+         function openBlogModal(blogId) {
+             const blog = blogData[blogId];
+             if (!blog) return;
+
+             const modal = document.getElementById('blogModal');
+             const modalImage = document.getElementById('modalImage');
+             const modalTitle = document.getElementById('modalTitle');
+             const modalMeta = document.getElementById('modalMeta');
+             const modalBody = document.getElementById('modalBody');
+
+             modalImage.src = blog.image;
+             modalImage.alt = blog.title;
+             modalTitle.textContent = blog.title;
+             
+             modalMeta.innerHTML = `
+                 <span class="blog-category">${blog.category}</span>
+                 <span class="blog-date">📅 ${blog.date}</span>
+                 <span class="blog-read-time">⏱️ ${blog.readTime}</span>
+             `;
+
+             modalBody.innerHTML = blog.content;
+
+             modal.classList.add('active');
+             document.body.style.overflow = 'hidden';
+         }
+
+         function closeBlogModal() {
+             const modal = document.getElementById('blogModal');
+             modal.classList.remove('active');
+             document.body.style.overflow = 'auto';
+         }
+
+         // Modal dışına tıklayınca kapanması için
+         document.getElementById('blogModal').addEventListener('click', function(e) {
+             if (e.target === this) {
+                 closeBlogModal();
+             }
+         });
+
+         // ESC tuşu ile kapatma
+         document.addEventListener('keydown', function(e) {
+             if (e.key === 'Escape') {
+                 closeBlogModal();
+             }
+         });
+
+         // Global fonksiyonlar
+         window.openBlogModal = openBlogModal;
+         window.closeBlogModal = closeBlogModal;
+        }
+        window.toggleMenu = function() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu) {
+                menu.classList.toggle('active');
+            }
+        };
+        window.toggleFAQ = function(element) {
+            const faqItem = element.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        };
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.service-card, .video-item, .faq-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Lazy loading for videos
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const iframe = entry.target.querySelector('iframe');
+                    if (iframe && !iframe.dataset.loaded) {
+                        iframe.dataset.loaded = 'true';
+                        // Video is already loaded via src, just mark as observed
+                    }
+                }
+            });
+        }, { threshold: 0.25 });
+
+        document.querySelectorAll('.video-item').forEach(item => {
+            videoObserver.observe(item);
+        });
+
+        // Add loading animation to buttons
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.href && this.href.startsWith('tel:')) {
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Aranıyor...';
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-phone"></i> Hemen Ara';
+                    }, 2000);
+                }
+            });
+        });
+        // Add scroll indicator
+        const scrollIndicator = document.createElement('div');
+        scrollIndicator.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--accent-green);
+            font-size: 24px;
+            animation: bounce 2s infinite;
+            z-index: 100;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        `;
+        scrollIndicator.innerHTML = '<i class="fas fa-chevron-down"></i>';
+        document.body.appendChild(scrollIndicator);
+
+        // Hide scroll indicator after first scroll
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                scrollIndicator.style.opacity = '0';
+            } else {
+                scrollIndicator.style.opacity = '1';
+            }
+        }, { once: false });
+
+        // Add bounce animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes bounce {
+                0%, 20%, 50%, 80%, 100% {
+                    transform: translateX(-50%) translateY(0);
+                }
+                40% {
+                    transform: translateX(-50%) translateY(-10px);
+                }
+                60% {
+                    transform: translateX(-50%) translateY(-5px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Performance optimization: Defer non-critical animations
+        setTimeout(() => {
+            document.querySelectorAll('.service-card').forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('animate-in');
+            });
+        }, 500);
+
+        // Add touch gestures for service cards slider
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        const slider = document.querySelector('.services-slider');
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2;
+            slider.scrollLeft = scrollLeft - walk;
+        });
+
+        // Notification system for contact buttons
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--accent-green)' : 'var(--accent-orange)'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                z-index: 10000;
+                font-size: 14px;
+                font-weight: 500;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                max-width: 300px;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Add notification for contact button clicks
+        document.querySelectorAll('.contact-btn, .btn-primary').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                if (btn.href && btn.href.includes('wa.me')) {
+                    showNotification('WhatsApp açılıyor...', 'success');
+                } else if (btn.href && btn.href.includes('instagram')) {
+                    showNotification('Instagram açılıyor...', 'success');
+                } else if (btn.href && btn.href.includes('tel:')) {
+                    showNotification('Telefon uygulaması açılıyor...', 'success');
+                }
+            });
+        });
+
+        console.log('🗡️ Sword Nest Mobile Interface Loaded Successfully!');
+    </script>
+
+         <!-- Blog Modal -->
+     <div id="blogModal" class="blog-modal">
+         <div class="blog-modal-content">
+             <div class="blog-modal-header">
+                 <button class="blog-modal-close" onclick="closeBlogModal()">
+                     <i class="fas fa-times"></i>
+                 </button>
+                 <img id="modalImage" src="" alt="" class="blog-modal-image">
+                 <h1 id="modalTitle"></h1>
+                 <div class="blog-modal-meta" id="modalMeta"></div>
+             </div>
+             <div class="blog-modal-body" id="modalBody">
+                 <!-- İçerik buraya gelecek -->
+             </div>
+         </div>
+     </div>
+
+     <div id="cookie-consent" class="cookie-consent">
+         <div class="cookie-container">
+             <div class="cookie-content">
+                 <div class="cookie-text">
+                     <h4>Çerezler 🍪</h4>
+                     <p>Daha iyi deneyim için çerez kullanıyoruz.</p>
+                 </div>
+                 <div class="cookie-actions">
+                     <button class="cookie-btn cookie-accept">Kabul</button>
+                     <button class="cookie-btn cookie-reject">Reddet</button>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <script src="assets/scripts/cookie-consent.js"></script>
+</body>
+</html>
